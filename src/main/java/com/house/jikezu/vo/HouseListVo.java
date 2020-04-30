@@ -20,4 +20,8 @@ public class HouseListVo {
     private Double xPosition;
     //用户y座标
     private Double yPosition;
+
+    private Integer currentPage;
+
+    private Integer pageSize;
 }
