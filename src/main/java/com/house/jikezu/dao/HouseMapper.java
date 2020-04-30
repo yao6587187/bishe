@@ -2,6 +2,7 @@ package com.house.jikezu.dao;
 
 
 import com.house.jikezu.model.House;
+import com.house.jikezu.vo.HouseListVo;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface HouseMapper {
     int updateByPrimaryKey(House record);
 
     List<House> listHouses(String ownUserNum);
+
+    List<House> selectHousesByPage(HouseListVo houseListVo);
 }

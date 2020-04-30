@@ -14,6 +14,7 @@ import com.house.jikezu.util.OrderUtil;
 import com.house.jikezu.vo.ContractInfoVO;
 import com.house.jikezu.vo.ContractSingleVO;
 import com.house.jikezu.vo.ContractVO;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -47,10 +48,14 @@ public class ContractHouseServiceImpl implements ContractHouseService {
         houseContract.setHouseTenantNum(contractSingleVO.getTenantNum());
         houseContract.setHouseLandlordNum(contractSingleVO.getLandlordNum());
         houseContract.setHouseContractNum(OrderUtil.getOrderNoByUUID("C"));
+        //插入合同数据
         houseContractMapper.insert(houseContract);
         House house = houseMapper.selectByPrimaryKey(houseReservation.getReservationHouseNum());
         house.setStatus(HouseStatusEnum.RENTED.getHouseStatus());
+        //更新房源信息为已租
         houseMapper.updateByPrimaryKey(house);
+        //删除预约表记录
+        houseReservationMapper.deleteByHouseReservationNum(contractSingleVO.getHouseReservationNum());
         return houseContract.getHouseContractNum();
     }
 
@@ -91,7 +96,7 @@ public class ContractHouseServiceImpl implements ContractHouseService {
         infoVO.setLandlordIdNum(landlord.getIdNum());
         infoVO.setLandlordPhoneNum(landlord.getPhoneNum());
         infoVO.setRegin(house.getRegion());
-        infoVO.setEndDate(stepMonth(houseContract.getContraceEffectiveDate(),houseContract.getDurationMonth()));
+        infoVO.setEndDate(stepMonth(houseContract.getContraceEffectiveDate(), houseContract.getDurationMonth()));
         infoVO.setTelnantIdNum(telnant.getIdNum());
         infoVO.setTelnantName(telnant.getUserName());
         infoVO.setTelnantPhontNum(telnant.getPhoneNum());
@@ -99,6 +104,26 @@ public class ContractHouseServiceImpl implements ContractHouseService {
         infoVO.setUnit(house.getUnit());
         infoVO.setLandlordName(landlord.getUserName());
         return infoVO;
+    }
+
+    @Override
+    public Integer updateByPrimaryKeySelective(HouseContract houseContract) {
+        if (null == houseContract || StringUtils.isBlank(houseContract.getHouseContractNum()) || null == houseContract.getDurationMonth()) {
+            return -1;
+        }
+        Integer oldMonth = houseContractMapper.selectByPrimaryKey(houseContract.getHouseContractNum()).getDurationMonth();
+        Integer newMonth = oldMonth + houseContract.getDurationMonth();
+        houseContract.setDurationMonth(newMonth);
+
+        return houseContractMapper.updateByPrimaryKeySelective(houseContract);
+    }
+
+    @Override
+    public Integer deleteByPrimaryKey(String houseContractNum) {
+        if (StringUtils.isBlank(houseContractNum)) {
+            return -1;
+        }
+        return houseContractMapper.deleteByPrimaryKey(houseContractNum);
     }
 
     public Date stepMonth(Date sourceDate, int month) {

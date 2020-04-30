@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.house.jikezu.dao.HouseMapper" >
+<mapper namespace="com.house.jikezu.dao.HouseMapper">
 
-    <resultMap id="BaseResultMap" type="com.house.jikezu.model.House" >
-        <id column="id" property="id" jdbcType="INTEGER" />
-        <result column="house_num" property="houseNum" jdbcType="VARCHAR" />
-        <result column="house_title" property="houseTitle" jdbcType="VARCHAR" />
-        <result column="status" property="status" jdbcType="VARCHAR" />
-        <result column="province" property="province" jdbcType="VARCHAR" />
-        <result column="city" property="city" jdbcType="VARCHAR" />
-        <result column="region" property="region" jdbcType="VARCHAR" />
-        <result column="desc_address" property="descAddress" jdbcType="VARCHAR" />
-        <result column="building" property="building" jdbcType="INTEGER" />
-        <result column="unit" property="unit" jdbcType="INTEGER" />
-        <result column="rent" property="rent" jdbcType="DOUBLE" />
-        <result column="rent_type" property="rentType" jdbcType="VARCHAR" />
-        <result column="unit_type" property="unitType" jdbcType="VARCHAR" />
-        <result column="area" property="area" jdbcType="VARCHAR" />
-        <result column="floor" property="floor" jdbcType="INTEGER" />
-        <result column="all_floor" property="allFloor" jdbcType="INTEGER" />
-        <result column="supporting_facilities" property="supportingFacilities" jdbcType="VARCHAR" />
-        <result column="house_desc" property="houseDesc" jdbcType="VARCHAR" />
-        <result column="contact_person" property="contactPerson" jdbcType="VARCHAR" />
-        <result column="phone_num" property="phoneNum" jdbcType="VARCHAR" />
-        <result column="photos_address" property="photosAddress" jdbcType="VARCHAR" />
-        <result column="x_position" property="xPosition" jdbcType="DOUBLE" />
-        <result column="y_position" property="yPosition" jdbcType="DOUBLE" />
-        <result column="own_user_num" property="ownUserNum" jdbcType="VARCHAR" />
+    <resultMap id="BaseResultMap" type="com.house.jikezu.model.House">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="house_num" property="houseNum" jdbcType="VARCHAR"/>
+        <result column="house_title" property="houseTitle" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="region" property="region" jdbcType="VARCHAR"/>
+        <result column="desc_address" property="descAddress" jdbcType="VARCHAR"/>
+        <result column="building" property="building" jdbcType="INTEGER"/>
+        <result column="unit" property="unit" jdbcType="INTEGER"/>
+        <result column="rent" property="rent" jdbcType="DOUBLE"/>
+        <result column="rent_type" property="rentType" jdbcType="VARCHAR"/>
+        <result column="unit_type" property="unitType" jdbcType="VARCHAR"/>
+        <result column="area" property="area" jdbcType="DOUBLE"/>
+        <result column="floor" property="floor" jdbcType="INTEGER"/>
+        <result column="all_floor" property="allFloor" jdbcType="INTEGER"/>
+        <result column="supporting_facilities" property="supportingFacilities" jdbcType="VARCHAR"/>
+        <result column="house_desc" property="houseDesc" jdbcType="VARCHAR"/>
+        <result column="contact_person" property="contactPerson" jdbcType="VARCHAR"/>
+        <result column="phone_num" property="phoneNum" jdbcType="VARCHAR"/>
+        <result column="photos_address" property="photosAddress" jdbcType="VARCHAR"/>
+        <result column="x_position" property="xPosition" jdbcType="DOUBLE"/>
+        <result column="y_position" property="yPosition" jdbcType="DOUBLE"/>
+        <result column="own_user_num" property="ownUserNum" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <sql id="Base_Column_List" >
+    <sql id="Base_Column_List">
         id, house_num, house_title, status, province, city, region, desc_address, building, 
         unit, rent, rent_type, unit_type, area, floor, all_floor, supporting_facilities, 
         house_desc, contact_person, phone_num, photos_address, x_position, y_position, own_user_num
     </sql>
 
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="string" >
-        select 
-        <include refid="Base_Column_List" />
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="string">
+        select
+        <include refid="Base_Column_List"/>
         from house
         where house_num = #{id,jdbcType=VARCHAR}
     </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete from house
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
-    <insert id="insert" parameterType="com.house.jikezu.model.House" >
+    <insert id="insert" parameterType="com.house.jikezu.model.House">
         insert into house (id, house_num, house_title, 
             status, province, city, 
             region, desc_address, building, 
@@ -61,242 +61,242 @@
             #{status,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
             #{region,jdbcType=VARCHAR}, #{descAddress,jdbcType=VARCHAR}, #{building,jdbcType=INTEGER}, 
             #{unit,jdbcType=INTEGER}, #{rent,jdbcType=DOUBLE}, #{rentType,jdbcType=VARCHAR}, 
-            #{unitType,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{floor,jdbcType=INTEGER}, 
+            #{unitType,jdbcType=VARCHAR}, #{area,jdbcType=DOUBLE}, #{floor,jdbcType=INTEGER},
             #{allFloor,jdbcType=INTEGER}, #{supportingFacilities,jdbcType=VARCHAR}, #{houseDesc,jdbcType=VARCHAR}, 
             #{contactPerson,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, #{photosAddress,jdbcType=VARCHAR}, 
             #{xPosition,jdbcType=DOUBLE}, #{yPosition,jdbcType=DOUBLE}, #{ownUserNum,jdbcType=VARCHAR}
             )
     </insert>
 
-    <insert id="insertSelective" parameterType="com.house.jikezu.model.House" >
+    <insert id="insertSelective" parameterType="com.house.jikezu.model.House">
         insert into house
-        <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
                 id,
             </if>
-            <if test="houseNum != null" >
+            <if test="houseNum != null">
                 house_num,
             </if>
-            <if test="houseTitle != null" >
+            <if test="houseTitle != null">
                 house_title,
             </if>
-            <if test="status != null" >
+            <if test="status != null">
                 status,
             </if>
-            <if test="province != null" >
+            <if test="province != null">
                 province,
             </if>
-            <if test="city != null" >
+            <if test="city != null">
                 city,
             </if>
-            <if test="region != null" >
+            <if test="region != null">
                 region,
             </if>
-            <if test="descAddress != null" >
+            <if test="descAddress != null">
                 desc_address,
             </if>
-            <if test="building != null" >
+            <if test="building != null">
                 building,
             </if>
-            <if test="unit != null" >
+            <if test="unit != null">
                 unit,
             </if>
-            <if test="rent != null" >
+            <if test="rent != null">
                 rent,
             </if>
-            <if test="rentType != null" >
+            <if test="rentType != null">
                 rent_type,
             </if>
-            <if test="unitType != null" >
+            <if test="unitType != null">
                 unit_type,
             </if>
-            <if test="area != null" >
+            <if test="area != null">
                 area,
             </if>
-            <if test="floor != null" >
+            <if test="floor != null">
                 floor,
             </if>
-            <if test="allFloor != null" >
+            <if test="allFloor != null">
                 all_floor,
             </if>
-            <if test="supportingFacilities != null" >
+            <if test="supportingFacilities != null">
                 supporting_facilities,
             </if>
-            <if test="houseDesc != null" >
+            <if test="houseDesc != null">
                 house_desc,
             </if>
-            <if test="contactPerson != null" >
+            <if test="contactPerson != null">
                 contact_person,
             </if>
-            <if test="phoneNum != null" >
+            <if test="phoneNum != null">
                 phone_num,
             </if>
-            <if test="photosAddress != null" >
+            <if test="photosAddress != null">
                 photos_address,
             </if>
-            <if test="xPosition != null" >
+            <if test="xPosition != null">
                 x_position,
             </if>
-            <if test="yPosition != null" >
+            <if test="yPosition != null">
                 y_position,
             </if>
-            <if test="ownUserNum != null" >
+            <if test="ownUserNum != null">
                 own_user_num,
             </if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="houseNum != null" >
+            <if test="houseNum != null">
                 #{houseNum,jdbcType=VARCHAR},
             </if>
-            <if test="houseTitle != null" >
+            <if test="houseTitle != null">
                 #{houseTitle,jdbcType=VARCHAR},
             </if>
-            <if test="status != null" >
+            <if test="status != null">
                 #{status,jdbcType=VARCHAR},
             </if>
-            <if test="province != null" >
+            <if test="province != null">
                 #{province,jdbcType=VARCHAR},
             </if>
-            <if test="city != null" >
+            <if test="city != null">
                 #{city,jdbcType=VARCHAR},
             </if>
-            <if test="region != null" >
+            <if test="region != null">
                 #{region,jdbcType=VARCHAR},
             </if>
-            <if test="descAddress != null" >
+            <if test="descAddress != null">
                 #{descAddress,jdbcType=VARCHAR},
             </if>
-            <if test="building != null" >
+            <if test="building != null">
                 #{building,jdbcType=INTEGER},
             </if>
-            <if test="unit != null" >
+            <if test="unit != null">
                 #{unit,jdbcType=INTEGER},
             </if>
-            <if test="rent != null" >
+            <if test="rent != null">
                 #{rent,jdbcType=DOUBLE},
             </if>
-            <if test="rentType != null" >
+            <if test="rentType != null">
                 #{rentType,jdbcType=VARCHAR},
             </if>
-            <if test="unitType != null" >
+            <if test="unitType != null">
                 #{unitType,jdbcType=VARCHAR},
             </if>
-            <if test="area != null" >
-                #{area,jdbcType=VARCHAR},
+            <if test="area != null">
+                #{area,jdbcType=DOUBLE},
             </if>
-            <if test="floor != null" >
+            <if test="floor != null">
                 #{floor,jdbcType=INTEGER},
             </if>
-            <if test="allFloor != null" >
+            <if test="allFloor != null">
                 #{allFloor,jdbcType=INTEGER},
             </if>
-            <if test="supportingFacilities != null" >
+            <if test="supportingFacilities != null">
                 #{supportingFacilities,jdbcType=VARCHAR},
             </if>
-            <if test="houseDesc != null" >
+            <if test="houseDesc != null">
                 #{houseDesc,jdbcType=VARCHAR},
             </if>
-            <if test="contactPerson != null" >
+            <if test="contactPerson != null">
                 #{contactPerson,jdbcType=VARCHAR},
             </if>
-            <if test="phoneNum != null" >
+            <if test="phoneNum != null">
                 #{phoneNum,jdbcType=VARCHAR},
             </if>
-            <if test="photosAddress != null" >
+            <if test="photosAddress != null">
                 #{photosAddress,jdbcType=VARCHAR},
             </if>
-            <if test="xPosition != null" >
+            <if test="xPosition != null">
                 #{xPosition,jdbcType=DOUBLE},
             </if>
-            <if test="yPosition != null" >
+            <if test="yPosition != null">
                 #{yPosition,jdbcType=DOUBLE},
             </if>
-            <if test="ownUserNum != null" >
+            <if test="ownUserNum != null">
                 #{ownUserNum,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.house.jikezu.model.House" >
+    <update id="updateByPrimaryKeySelective" parameterType="com.house.jikezu.model.House">
         update house
-        <set >
-            <if test="houseNum != null" >
+        <set>
+            <if test="houseNum != null">
                 house_num = #{houseNum,jdbcType=VARCHAR},
             </if>
-            <if test="houseTitle != null" >
+            <if test="houseTitle != null">
                 house_title = #{houseTitle,jdbcType=VARCHAR},
             </if>
-            <if test="status != null" >
+            <if test="status != null">
                 status = #{status,jdbcType=VARCHAR},
             </if>
-            <if test="province != null" >
+            <if test="province != null">
                 province = #{province,jdbcType=VARCHAR},
             </if>
-            <if test="city != null" >
+            <if test="city != null">
                 city = #{city,jdbcType=VARCHAR},
             </if>
-            <if test="region != null" >
+            <if test="region != null">
                 region = #{region,jdbcType=VARCHAR},
             </if>
-            <if test="descAddress != null" >
+            <if test="descAddress != null">
                 desc_address = #{descAddress,jdbcType=VARCHAR},
             </if>
-            <if test="building != null" >
+            <if test="building != null">
                 building = #{building,jdbcType=INTEGER},
             </if>
-            <if test="unit != null" >
+            <if test="unit != null">
                 unit = #{unit,jdbcType=INTEGER},
             </if>
-            <if test="rent != null" >
+            <if test="rent != null">
                 rent = #{rent,jdbcType=DOUBLE},
             </if>
-            <if test="rentType != null" >
+            <if test="rentType != null">
                 rent_type = #{rentType,jdbcType=VARCHAR},
             </if>
-            <if test="unitType != null" >
+            <if test="unitType != null">
                 unit_type = #{unitType,jdbcType=VARCHAR},
             </if>
-            <if test="area != null" >
-                area = #{area,jdbcType=VARCHAR},
+            <if test="area != null">
+                area = #{area,jdbcType=DOUBLE},
             </if>
-            <if test="floor != null" >
+            <if test="floor != null">
                 floor = #{floor,jdbcType=INTEGER},
             </if>
-            <if test="allFloor != null" >
+            <if test="allFloor != null">
                 all_floor = #{allFloor,jdbcType=INTEGER},
             </if>
-            <if test="supportingFacilities != null" >
+            <if test="supportingFacilities != null">
                 supporting_facilities = #{supportingFacilities,jdbcType=VARCHAR},
             </if>
-            <if test="houseDesc != null" >
+            <if test="houseDesc != null">
                 house_desc = #{houseDesc,jdbcType=VARCHAR},
             </if>
-            <if test="contactPerson != null" >
+            <if test="contactPerson != null">
                 contact_person = #{contactPerson,jdbcType=VARCHAR},
             </if>
-            <if test="phoneNum != null" >
+            <if test="phoneNum != null">
                 phone_num = #{phoneNum,jdbcType=VARCHAR},
             </if>
-            <if test="photosAddress != null" >
+            <if test="photosAddress != null">
                 photos_address = #{photosAddress,jdbcType=VARCHAR},
             </if>
-            <if test="xPosition != null" >
+            <if test="xPosition != null">
                 x_position = #{xPosition,jdbcType=DOUBLE},
             </if>
-            <if test="yPosition != null" >
+            <if test="yPosition != null">
                 y_position = #{yPosition,jdbcType=DOUBLE},
             </if>
-            <if test="ownUserNum != null" >
+            <if test="ownUserNum != null">
                 own_user_num = #{ownUserNum,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.house.jikezu.model.House" >
+    <update id="updateByPrimaryKey" parameterType="com.house.jikezu.model.House">
         update house
         set house_num = #{houseNum,jdbcType=VARCHAR},
             house_title = #{houseTitle,jdbcType=VARCHAR},
@@ -310,7 +310,7 @@
             rent = #{rent,jdbcType=DOUBLE},
             rent_type = #{rentType,jdbcType=VARCHAR},
             unit_type = #{unitType,jdbcType=VARCHAR},
-            area = #{area,jdbcType=VARCHAR},
+            area = #{area,jdbcType=DOUBLE},
             floor = #{floor,jdbcType=INTEGER},
             all_floor = #{allFloor,jdbcType=INTEGER},
             supporting_facilities = #{supportingFacilities,jdbcType=VARCHAR},
@@ -324,10 +324,46 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <select id="listHouses" resultMap="BaseResultMap" parameterType="string" >
+    <select id="listHouses" resultMap="BaseResultMap" parameterType="string">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from house
         where own_user_num = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectHousesByPage" resultMap="BaseResultMap" parameterType="com.house.jikezu.vo.HouseListVo">
+        select
+        <include refid="Base_Column_List"/>
+        from house
+        <where>
+            status = '未出租' and own_user_num != #{ownUserNum}
+            <if test="province!=null">
+                and province = #{province}
+            </if>
+            <if test="city!=null">
+                and city = #{city}
+            </if>
+            <if test="region!=null">
+                and region = #{region}
+            </if>
+            <if test="descAddress!=null">
+                and desc_address like '%${descAddress}%'
+            </if>
+            <if test="maxArea!=null">
+                and area &lt;= #{maxArea}
+            </if>
+            <if test="minArea!=null">
+                and area &gt;= #{minArea}
+            </if>
+            <if test="maxRent!=null">
+                and rent &lt;= #{maxRent}
+            </if>
+            <if test="minRent!=null">
+                and rent &gt;= #{minRent}
+            </if>
+            <if test="rentType!=null">
+                and rent_type = #{rentType}
+            </if>
+        </where>
     </select>
 </mapper>

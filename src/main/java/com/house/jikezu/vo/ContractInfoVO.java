@@ -16,7 +16,7 @@ public class ContractInfoVO {
     private String regin;
     private Integer buildings;
     private Integer unit;
-    private String area;
+    private Double area;
     private Date beginDate;
     private Date endDate;
     private String landlordPhoneNum;

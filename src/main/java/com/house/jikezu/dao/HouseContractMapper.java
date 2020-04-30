@@ -6,7 +6,7 @@ import com.house.jikezu.model.HouseContract;
 import java.util.List;
 
 public interface HouseContractMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String houseContractNum);
 
     int insert(HouseContract record);
 

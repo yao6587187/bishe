@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.house.jikezu.dao.HouseContractMapper" >
+<mapper namespace="com.house.jikezu.dao.HouseContractMapper">
 
-    <resultMap id="BaseResultMap" type="com.house.jikezu.model.HouseContract" >
-        <id column="id" property="id" jdbcType="INTEGER" />
-        <result column="house_contract_num" property="houseContractNum" jdbcType="VARCHAR" />
-        <result column="house_num" property="houseNum" jdbcType="VARCHAR" />
-        <result column="duration_month" property="durationMonth" jdbcType="INTEGER" />
-        <result column="house_landlord_num" property="houseLandlordNum" jdbcType="VARCHAR" />
-        <result column="house_tenant_num" property="houseTenantNum" jdbcType="VARCHAR" />
-        <result column="contrace_effective_date" property="contraceEffectiveDate" jdbcType="TIMESTAMP" />
+    <resultMap id="BaseResultMap" type="com.house.jikezu.model.HouseContract">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="house_contract_num" property="houseContractNum" jdbcType="VARCHAR"/>
+        <result column="house_num" property="houseNum" jdbcType="VARCHAR"/>
+        <result column="duration_month" property="durationMonth" jdbcType="INTEGER"/>
+        <result column="house_landlord_num" property="houseLandlordNum" jdbcType="VARCHAR"/>
+        <result column="house_tenant_num" property="houseTenantNum" jdbcType="VARCHAR"/>
+        <result column="contrace_effective_date" property="contraceEffectiveDate" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <sql id="Base_Column_List" >
+    <sql id="Base_Column_List">
         id, house_contract_num, house_num, duration_month, house_landlord_num, house_tenant_num, 
         contrace_effective_date
     </sql>
 
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="string" >
-        select 
-        <include refid="Base_Column_List" />
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
         from house_contract
         where house_contract_num = #{id,jdbcType=VARCHAR}
     </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         delete from house_contract
-        where id = #{id,jdbcType=INTEGER}
+        where house_contract_num = #{id,jdbcType=VARCHAR}
     </delete>
 
-    <insert id="insert" parameterType="com.house.jikezu.model.HouseContract" >
+    <insert id="insert" parameterType="com.house.jikezu.model.HouseContract">
         insert into house_contract (id, house_contract_num, house_num, 
             duration_month, house_landlord_num, house_tenant_num, 
             contrace_effective_date)
@@ -38,82 +38,82 @@
             #{contraceEffectiveDate,jdbcType=TIMESTAMP})
     </insert>
 
-    <insert id="insertSelective" parameterType="com.house.jikezu.model.HouseContract" >
+    <insert id="insertSelective" parameterType="com.house.jikezu.model.HouseContract">
         insert into house_contract
-        <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
                 id,
             </if>
-            <if test="houseContractNum != null" >
+            <if test="houseContractNum != null">
                 house_contract_num,
             </if>
-            <if test="houseNum != null" >
+            <if test="houseNum != null">
                 house_num,
             </if>
-            <if test="durationMonth != null" >
+            <if test="durationMonth != null">
                 duration_month,
             </if>
-            <if test="houseLandlordNum != null" >
+            <if test="houseLandlordNum != null">
                 house_landlord_num,
             </if>
-            <if test="houseTenantNum != null" >
+            <if test="houseTenantNum != null">
                 house_tenant_num,
             </if>
-            <if test="contraceEffectiveDate != null" >
+            <if test="contraceEffectiveDate != null">
                 contrace_effective_date,
             </if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="houseContractNum != null" >
+            <if test="houseContractNum != null">
                 #{houseContractNum,jdbcType=VARCHAR},
             </if>
-            <if test="houseNum != null" >
+            <if test="houseNum != null">
                 #{houseNum,jdbcType=VARCHAR},
             </if>
-            <if test="durationMonth != null" >
+            <if test="durationMonth != null">
                 #{durationMonth,jdbcType=INTEGER},
             </if>
-            <if test="houseLandlordNum != null" >
+            <if test="houseLandlordNum != null">
                 #{houseLandlordNum,jdbcType=VARCHAR},
             </if>
-            <if test="houseTenantNum != null" >
+            <if test="houseTenantNum != null">
                 #{houseTenantNum,jdbcType=VARCHAR},
             </if>
-            <if test="contraceEffectiveDate != null" >
+            <if test="contraceEffectiveDate != null">
                 #{contraceEffectiveDate,jdbcType=TIMESTAMP},
             </if>
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.house.jikezu.model.HouseContract" >
+    <update id="updateByPrimaryKeySelective" parameterType="com.house.jikezu.model.HouseContract">
         update house_contract
-        <set >
-            <if test="houseContractNum != null" >
+        <set>
+            <if test="houseContractNum != null">
                 house_contract_num = #{houseContractNum,jdbcType=VARCHAR},
             </if>
-            <if test="houseNum != null" >
+            <if test="houseNum != null">
                 house_num = #{houseNum,jdbcType=VARCHAR},
             </if>
-            <if test="durationMonth != null" >
+            <if test="durationMonth != null">
                 duration_month = #{durationMonth,jdbcType=INTEGER},
             </if>
-            <if test="houseLandlordNum != null" >
+            <if test="houseLandlordNum != null">
                 house_landlord_num = #{houseLandlordNum,jdbcType=VARCHAR},
             </if>
-            <if test="houseTenantNum != null" >
+            <if test="houseTenantNum != null">
                 house_tenant_num = #{houseTenantNum,jdbcType=VARCHAR},
             </if>
-            <if test="contraceEffectiveDate != null" >
+            <if test="contraceEffectiveDate != null">
                 contrace_effective_date = #{contraceEffectiveDate,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where id = #{id,jdbcType=INTEGER}
+        where house_contract_num = #{houseContractNum,jdbcType=VARCHAR}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.house.jikezu.model.HouseContract" >
+    <update id="updateByPrimaryKey" parameterType="com.house.jikezu.model.HouseContract">
         update house_contract
         set house_contract_num = #{houseContractNum,jdbcType=VARCHAR},
             house_num = #{houseNum,jdbcType=VARCHAR},
@@ -126,7 +126,7 @@
 
     <select id="listHouseContract" parameterType="string" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from house_contract
         where house_landlord_num = #{id,jdbcType=VARCHAR} or house_tenant_num = #{id,jdbcType=VARCHAR}
     </select>

@@ -3,10 +3,7 @@ package com.house.jikezu.model;
 import com.house.jikezu.enums.HouseStatusEnum;
 
 /**
- * 
- * 
  * @author wcyong
- * 
  * @date 2020-04-29
  */
 public class House {
@@ -54,7 +51,7 @@ public class House {
 
     private String unitType;
 
-    private String area;
+    private Double area;
 
     private Integer floor;
 
@@ -189,12 +186,12 @@ public class House {
         this.unitType = unitType == null ? null : unitType.trim();
     }
 
-    public String getArea() {
+    public Double getArea() {
         return area;
     }
 
-    public void setArea(String area) {
-        this.area = area == null ? null : area.trim();
+    public void setArea(Double area) {
+        this.area = area;
     }
 
     public Integer getFloor() {
@@ -275,5 +272,35 @@ public class House {
 
     public void setOwnUserNum(String ownUserNum) {
         this.ownUserNum = ownUserNum == null ? null : ownUserNum.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "House{" +
+                "id=" + id +
+                ", houseNum='" + houseNum + '\'' +
+                ", houseTitle='" + houseTitle + '\'' +
+                ", status='" + status + '\'' +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", region='" + region + '\'' +
+                ", descAddress='" + descAddress + '\'' +
+                ", building=" + building +
+                ", unit=" + unit +
+                ", rent=" + rent +
+                ", rentType='" + rentType + '\'' +
+                ", unitType='" + unitType + '\'' +
+                ", area=" + area +
+                ", floor=" + floor +
+                ", allFloor=" + allFloor +
+                ", supportingFacilities='" + supportingFacilities + '\'' +
+                ", houseDesc='" + houseDesc + '\'' +
+                ", contactPerson='" + contactPerson + '\'' +
+                ", phoneNum='" + phoneNum + '\'' +
+                ", photosAddress='" + photosAddress + '\'' +
+                ", xPosition=" + xPosition +
+                ", yPosition=" + yPosition +
+                ", ownUserNum='" + ownUserNum + '\'' +
+                '}';
     }
 }
