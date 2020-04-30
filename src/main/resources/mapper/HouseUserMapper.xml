@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.house.jikezu.dao.HouseUserMapper" >
+
+    <resultMap id="BaseResultMap" type="com.house.jikezu.model.HouseUser" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="user_num" property="userNum" jdbcType="VARCHAR" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="phone_num" property="phoneNum" jdbcType="VARCHAR" />
+        <result column="user_id" property="userId" jdbcType="VARCHAR" />
+        <result column="id_num" property="idNum" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, user_num, user_name, password, phone_num, user_id, id_num
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="string" >
+        select 
+        <include refid="Base_Column_List" />
+        from house_user
+        where user_num = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from house_user
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.house.jikezu.model.HouseUser" >
+        insert into house_user (id, user_num, user_name, 
+            password, phone_num, user_id, 
+            id_num)
+        values (#{id,jdbcType=INTEGER}, #{userNum,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+            #{password,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+            #{idNum,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.house.jikezu.model.HouseUser" >
+        insert into house_user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="userNum != null" >
+                user_num,
+            </if>
+            <if test="userName != null" >
+                user_name,
+            </if>
+            <if test="password != null" >
+                password,
+            </if>
+            <if test="phoneNum != null" >
+                phone_num,
+            </if>
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="idNum != null" >
+                id_num,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userNum != null" >
+                #{userNum,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null" >
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNum != null" >
+                #{phoneNum,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null" >
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="idNum != null" >
+                #{idNum,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.house.jikezu.model.HouseUser" >
+        update house_user
+        <set >
+            <if test="userNum != null" >
+                user_num = #{userNum,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null" >
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNum != null" >
+                phone_num = #{phoneNum,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="idNum != null" >
+                id_num = #{idNum,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.house.jikezu.model.HouseUser" >
+        update house_user
+        set user_num = #{userNum,jdbcType=VARCHAR},
+            user_name = #{userName,jdbcType=VARCHAR},
+            password = #{password,jdbcType=VARCHAR},
+            phone_num = #{phoneNum,jdbcType=VARCHAR},
+            user_id = #{userId,jdbcType=VARCHAR},
+            id_num = #{idNum,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
