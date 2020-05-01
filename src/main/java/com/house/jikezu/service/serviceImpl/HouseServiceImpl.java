@@ -64,6 +64,7 @@ public class HouseServiceImpl implements HouseService {
             houseListReturnVO.setRent(h.getRent());
             houseListReturnVO.setLength(MapUtils.GetDistance(houseListVo.getXPosition(), houseListVo.getYPosition(),
                     h.getxPosition(), h.getyPosition()));
+            houseListReturnVO.setLandlordNum(h.getOwnUserNum());
             houseListReturnVOs.add(houseListReturnVO);
         }
         List<HouseListReturnVO> returnVOS =
@@ -87,6 +88,7 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public String deleteHouseByHouseNum(String houseNum) {
+        houseReleaseMapper.deleteByReleaseHouseNum(houseNum);
         houseMapper.deleteByPrimaryKey(houseNum);
         return houseNum;
     }

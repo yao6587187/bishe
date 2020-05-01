@@ -125,5 +125,9 @@
         where reservation_landlord_num = #{id,jdbcType=VARCHAR}
     </select>
 
+    <delete id="deleteByReservationHouseNum" parameterType="string">
+        delete from house_reservation
+        where reservation_house_num = #{id,jdbcType=VARCHAR}
+    </delete>
 
 </mapper>

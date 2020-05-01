@@ -119,4 +119,9 @@
         from house_release
         where release_user_num != #{id,jdbcType=VARCHAR}
     </select>
+
+    <delete id="deleteByReleaseHouseNum" parameterType="string">
+        delete from house_release
+        where release_house_num = #{id,jdbcType=VARCHAR}
+    </delete>
 </mapper>

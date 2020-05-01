@@ -18,4 +18,6 @@ public class HouseListReturnVO {
     private String address;
     private Double rent;
     private Double length;
+
+    private String landlordNum;
 }

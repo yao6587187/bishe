@@ -55,7 +55,9 @@ public class ContractHouseServiceImpl implements ContractHouseService {
         //更新房源信息为已租
         houseMapper.updateByPrimaryKey(house);
         //删除预约表记录
-        houseReservationMapper.deleteByHouseReservationNum(contractSingleVO.getHouseReservationNum());
+        houseReservationMapper.deleteByReservationHouseNum(house.getHouseNum());
+        //删除发布记录
+        houseReservationMapper.deleteByReservationHouseNum(house.getHouseNum());
         return houseContract.getHouseContractNum();
     }
 

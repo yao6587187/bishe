@@ -24,4 +24,6 @@ public interface HouseReleaseMapper {
     HouseRelease getHouseReleaseByHouseNum(String houseReleaseNum);
 
     List<HouseRelease> listAllReleaseHousesExcMe(String landlordNum);
+
+    void deleteByReleaseHouseNum(String houseNum);
 }

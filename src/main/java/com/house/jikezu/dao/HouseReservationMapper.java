@@ -22,4 +22,6 @@ public interface HouseReservationMapper {
 
     int deleteByHouseReservationNum(String houseReservationNum);
 
+    void deleteByReservationHouseNum(String houseNum);
+
 }

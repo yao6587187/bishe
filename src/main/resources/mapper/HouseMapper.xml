@@ -337,7 +337,7 @@
         from house,house_release
         <where>
             house.house_num = house_release.release_house_num and status = 'NOTRENT'
-            and own_user_num != #{ownUserNum,jdbcType=VARCHAR}
+            and release_user_num != #{ownUserNum,jdbcType=VARCHAR}
             <if test="province!=null">
                 and province = #{province}
             </if>
