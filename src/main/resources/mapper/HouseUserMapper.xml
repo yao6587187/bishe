@@ -90,9 +90,6 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.house.jikezu.model.HouseUser" >
         update house_user
         <set >
-            <if test="userNum != null" >
-                user_num = #{userNum,jdbcType=VARCHAR},
-            </if>
             <if test="userName != null" >
                 user_name = #{userName,jdbcType=VARCHAR},
             </if>
@@ -109,7 +106,7 @@
                 id_num = #{idNum,jdbcType=VARCHAR},
             </if>
         </set>
-        where id = #{id,jdbcType=INTEGER}
+        where user_num = #{userNum,jdbcType=VARCHAR}
     </update>
 
     <update id="updateByPrimaryKey" parameterType="com.house.jikezu.model.HouseUser" >

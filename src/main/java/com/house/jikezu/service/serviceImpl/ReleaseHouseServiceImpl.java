@@ -23,7 +23,11 @@ public class ReleaseHouseServiceImpl implements ReleaseHouseService {
 
     @Override
     public String release(String houseNum, String landlordNum) {
-        HouseRelease release = new HouseRelease();
+        HouseRelease release = houseReleaseMapper.getHouseReleaseByHouseNum(houseNum);
+        if (release != null){
+            return "existed";
+        }
+        release = new HouseRelease();
         release.setHouseReleaseNum(OrderUtil.getOrderNoByUUID("R"));
         release.setReleaseHouseNum(houseNum);
         release.setReleaseUserNum(landlordNum);

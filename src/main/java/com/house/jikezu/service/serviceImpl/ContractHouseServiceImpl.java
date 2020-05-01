@@ -74,7 +74,10 @@ public class ContractHouseServiceImpl implements ContractHouseService {
             contractVO.setMonthNum(houseContract.getDurationMonth());
             contractVO.setTenantName(telnant.getUserName());
             contractVO.setLandlordName(landlord.getUserName());
-            String descAddress = house.getProvince() + "省" + house.getCity() + "市" + house.getRegion() + "区" +
+            contractVO.setHouseTenantNum(telnant.getUserNum());
+            contractVO.setHouseLandlordNum(landlord.getUserNum());
+            contractVO.setHouseNum(house.getHouseNum());
+            String descAddress = house.getProvince() + house.getCity() + house.getRegion() +
                     "{" + house.getDescAddress() + "}" + house.getBuilding() + "栋" + house.getUnit() + "单元";
             contractVO.setHouseAddress(descAddress);
             contractVOS.add(contractVO);

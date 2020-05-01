@@ -19,4 +19,10 @@ public class ContractVO {
 
     private String houseAddress;
 
+    private String houseNum;
+
+    private String houseTenantNum;
+
+    private String houseLandlordNum;
+
 }

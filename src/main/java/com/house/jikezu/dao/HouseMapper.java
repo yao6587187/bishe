@@ -7,7 +7,7 @@ import com.house.jikezu.vo.HouseListVo;
 import java.util.List;
 
 public interface HouseMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String houseNum);
 
     int insert(House record);
 

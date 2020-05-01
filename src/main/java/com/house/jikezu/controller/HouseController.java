@@ -51,4 +51,10 @@ public class HouseController {
         conditionHouseReturnVO.setResultHouses(vos);
         return conditionHouseReturnVO;
     }
+
+    @GetMapping("/deleteHouse")
+    @ApiOperation("删除房源")
+    public String delete(@RequestParam String houseNum){
+        return houseService.deleteHouseByHouseNum(houseNum);
+    }
 }

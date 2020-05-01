@@ -53,12 +53,12 @@ public class ReservationHouseServiceImpl implements ReservationHouseService {
             reservationListReturnVO = new ReservationListReturnVO();
 
             reservationListReturnVO.setHouseReservationNum(houseReservation.getHouseReservationNum());
-            reservationListReturnVO.setHouseAddress(house.getProvince() + "省" + house.getCity() + "市" + house.getRegion() + "区"
+            reservationListReturnVO.setHouseAddress(house.getProvince() + house.getCity() + house.getRegion()
                     + house.getDescAddress() + house.getBuilding() + "栋第" + house.getFloor() + "层" + house.getUnit() + "单元");
             reservationListReturnVO.setReservationUserName(tenant.getUserName());
             reservationListReturnVO.setReservationUserMobile(tenant.getPhoneNum());
             reservationListReturnVO.setReservationDate(houseReservation.getReservationDate());
-
+            reservationListReturnVO.setReservationUserNum(tenant.getUserNum());
             reservationListReturnVOs.add(reservationListReturnVO);
         }
         return reservationListReturnVOs;

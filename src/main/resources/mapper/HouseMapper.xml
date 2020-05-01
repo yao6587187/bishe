@@ -42,9 +42,9 @@
         where house_num = #{id,jdbcType=VARCHAR}
     </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="deleteByPrimaryKey" parameterType="string">
         delete from house
-        where id = #{id,jdbcType=INTEGER}
+        where house_num = #{id,jdbcType=VARCHAR}
     </delete>
 
     <insert id="insert" parameterType="com.house.jikezu.model.House">

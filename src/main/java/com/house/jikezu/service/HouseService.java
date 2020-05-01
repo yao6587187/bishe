@@ -31,4 +31,9 @@ public interface HouseService {
      */
     List<HouseListReturnVO> selectHousesByPage(HouseListVo houseListVo, Integer currentPage, Integer pageSize);
 
+    /**
+     * 删除房源
+     */
+    String deleteHouseByHouseNum(String houseNum);
+
 }

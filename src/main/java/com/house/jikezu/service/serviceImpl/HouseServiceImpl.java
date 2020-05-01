@@ -84,4 +84,10 @@ public class HouseServiceImpl implements HouseService {
         }
         return VOS;
     }
+
+    @Override
+    public String deleteHouseByHouseNum(String houseNum) {
+        houseMapper.deleteByPrimaryKey(houseNum);
+        return houseNum;
+    }
 }

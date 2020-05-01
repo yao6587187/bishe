@@ -16,5 +16,7 @@ public class ReservationListReturnVO {
     private String reservationUserMobile;
     //看房时间
     private Date reservationDate;
+    //预约人编号
+    private String reservationUserNum;
 }
 

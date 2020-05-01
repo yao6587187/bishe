@@ -33,64 +33,64 @@
             #{releaseHouseNum,jdbcType=VARCHAR}, #{houseReleasecol,jdbcType=VARCHAR})
     </insert>
 
-    <insert id="insertSelective" parameterType="com.house.jikezu.model.HouseRelease">
+    <insert id="insertSelective" parameterType="com.house.jikezu.model.HouseRelease" >
         insert into house_release
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
                 id,
             </if>
-            <if test="houseReleaseNum != null">
+            <if test="houseReleaseNum != null" >
                 house_release_num,
             </if>
-            <if test="releaseUserNum != null">
+            <if test="releaseUserNum != null" >
                 release_user_num,
             </if>
-            <if test="releaseHouseNum != null">
+            <if test="releaseHouseNum != null" >
                 release_house_num,
             </if>
-            <if test="houseReleasecol != null">
+            <if test="houseReleasecol != null" >
                 house_releasecol,
             </if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="houseReleaseNum != null">
+            <if test="houseReleaseNum != null" >
                 #{houseReleaseNum,jdbcType=VARCHAR},
             </if>
-            <if test="releaseUserNum != null">
+            <if test="releaseUserNum != null" >
                 #{releaseUserNum,jdbcType=VARCHAR},
             </if>
-            <if test="releaseHouseNum != null">
+            <if test="releaseHouseNum != null" >
                 #{releaseHouseNum,jdbcType=VARCHAR},
             </if>
-            <if test="houseReleasecol != null">
+            <if test="houseReleasecol != null" >
                 #{houseReleasecol,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.house.jikezu.model.HouseRelease">
+    <update id="updateByPrimaryKeySelective" parameterType="com.house.jikezu.model.HouseRelease" >
         update house_release
-        <set>
-            <if test="houseReleaseNum != null">
+        <set >
+            <if test="houseReleaseNum != null" >
                 house_release_num = #{houseReleaseNum,jdbcType=VARCHAR},
             </if>
-            <if test="releaseUserNum != null">
+            <if test="releaseUserNum != null" >
                 release_user_num = #{releaseUserNum,jdbcType=VARCHAR},
             </if>
-            <if test="releaseHouseNum != null">
+            <if test="releaseHouseNum != null" >
                 release_house_num = #{releaseHouseNum,jdbcType=VARCHAR},
             </if>
-            <if test="houseReleasecol != null">
+            <if test="houseReleasecol != null" >
                 house_releasecol = #{houseReleasecol,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.house.jikezu.model.HouseRelease">
+    <update id="updateByPrimaryKey" parameterType="com.house.jikezu.model.HouseRelease" >
         update house_release
         set house_release_num = #{houseReleaseNum,jdbcType=VARCHAR},
             release_user_num = #{releaseUserNum,jdbcType=VARCHAR},
@@ -104,6 +104,13 @@
         <include refid="Base_Column_List"/>
         from house_release
         where release_user_num = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getHouseReleaseByHouseNum" resultMap="BaseResultMap" parameterType="string">
+        select
+        <include refid="Base_Column_List" />
+        from house_release
+        where release_house_num = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="listAllReleaseHousesExcMe" resultMap="BaseResultMap" parameterType="string">
