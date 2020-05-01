@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.house.jikezu.dao.HouseContractRequestMapper" >
+
+    <resultMap id="BaseResultMap" type="com.house.jikezu.model.HouseContractRequest" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="contract_request_num" property="contractRequestNum" jdbcType="VARCHAR" />
+        <result column="house_contract_num" property="houseContractNum" jdbcType="VARCHAR" />
+        <result column="request_type" property="requestType" jdbcType="VARCHAR" />
+        <result column="tenant_num" property="tenantNum" jdbcType="VARCHAR" />
+        <result column="landlord_num" property="landlordNum" jdbcType="VARCHAR" />
+        <result column="xuyueTime" property="xuyuetime" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, contract_request_num, house_contract_num, request_type, tenant_num, landlord_num,
+        xuyueTime
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="string" >
+        select
+        <include refid="Base_Column_List" />
+        from house_contract_request
+        where house_contract_num = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="string" >
+        delete from house_contract_request
+        where house_contract_num = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.house.jikezu.model.HouseContractRequest" >
+        insert into house_contract_request (id, contract_request_num, house_contract_num,
+            request_type, tenant_num, landlord_num,
+            xuyueTime)
+        values (#{id,jdbcType=INTEGER}, #{contractRequestNum,jdbcType=VARCHAR}, #{houseContractNum,jdbcType=VARCHAR},
+            #{requestType,jdbcType=VARCHAR}, #{tenantNum,jdbcType=VARCHAR}, #{landlordNum,jdbcType=VARCHAR},
+            #{xuyuetime,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.house.jikezu.model.HouseContractRequest" >
+        insert into house_contract_request
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="contractRequestNum != null" >
+                contract_request_num,
+            </if>
+            <if test="houseContractNum != null" >
+                house_contract_num,
+            </if>
+            <if test="requestType != null" >
+                request_type,
+            </if>
+            <if test="tenantNum != null" >
+                tenant_num,
+            </if>
+            <if test="landlordNum != null" >
+                landlord_num,
+            </if>
+            <if test="xuyuetime != null" >
+                xuyueTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="contractRequestNum != null" >
+                #{contractRequestNum,jdbcType=VARCHAR},
+            </if>
+            <if test="houseContractNum != null" >
+                #{houseContractNum,jdbcType=VARCHAR},
+            </if>
+            <if test="requestType != null" >
+                #{requestType,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantNum != null" >
+                #{tenantNum,jdbcType=VARCHAR},
+            </if>
+            <if test="landlordNum != null" >
+                #{landlordNum,jdbcType=VARCHAR},
+            </if>
+            <if test="xuyuetime != null" >
+                #{xuyuetime,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.house.jikezu.model.HouseContractRequest" >
+        update house_contract_request
+        <set >
+            <if test="contractRequestNum != null" >
+                contract_request_num = #{contractRequestNum,jdbcType=VARCHAR},
+            </if>
+            <if test="houseContractNum != null" >
+                house_contract_num = #{houseContractNum,jdbcType=VARCHAR},
+            </if>
+            <if test="requestType != null" >
+                request_type = #{requestType,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantNum != null" >
+                tenant_num = #{tenantNum,jdbcType=VARCHAR},
+            </if>
+            <if test="landlordNum != null" >
+                landlord_num = #{landlordNum,jdbcType=VARCHAR},
+            </if>
+            <if test="xuyuetime != null" >
+                xuyueTime = #{xuyuetime,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.house.jikezu.model.HouseContractRequest" >
+        update house_contract_request
+        set contract_request_num = #{contractRequestNum,jdbcType=VARCHAR},
+            house_contract_num = #{houseContractNum,jdbcType=VARCHAR},
+            request_type = #{requestType,jdbcType=VARCHAR},
+            tenant_num = #{tenantNum,jdbcType=VARCHAR},
+            landlord_num = #{landlordNum,jdbcType=VARCHAR},
+            xuyueTime = #{xuyuetime,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="getHouseContractRequestByLandlordNumPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from house_contract_request
+        where landlord_num = #{userNum,jdbcType=VARCHAR}
+        limit #{pageIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+    </select>
+</mapper>

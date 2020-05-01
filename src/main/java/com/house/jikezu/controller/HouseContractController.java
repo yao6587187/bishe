@@ -1,8 +1,8 @@
 package com.house.jikezu.controller;
 
 
-import com.house.jikezu.model.HouseContract;
 import com.house.jikezu.service.ContractHouseService;
+import com.house.jikezu.service.ContractRequestService;
 import com.house.jikezu.vo.ContractInfoVO;
 import com.house.jikezu.vo.ContractSingleVO;
 import com.house.jikezu.vo.ContractVO;
@@ -24,6 +24,9 @@ public class HouseContractController {
     @Resource
     ContractHouseService contractHouseService;
 
+    @Resource
+    ContractRequestService contractRequestService;
+
     @ApiOperation("生成合同")
     @PostMapping("/contractHouse")
     public String contract(@RequestBody ContractSingleVO contractSingleVO) {
@@ -44,15 +47,17 @@ public class HouseContractController {
 
     @ApiOperation("续约")
     @PostMapping("/continueContract")
-    public Integer continueContract(@RequestBody HouseContract houseContract) {
-        return contractHouseService.updateByPrimaryKeySelective(houseContract);
+    public String continueContract(@RequestParam String userNum,@RequestParam String houseContractNum,@RequestParam String requestType,
+                                   @RequestParam Integer xuyueTime) {
+        return contractRequestService.sendContractRequest(userNum,houseContractNum,requestType,xuyueTime);
     }
 
     @ApiOperation("解约")
     @ApiParam(name = "houseContractNum", value = "合同编号")
     @GetMapping("/endContract")
-    public Integer endContract(@RequestParam String houseContractNum) {
-        return contractHouseService.deleteByPrimaryKey(houseContractNum);
+    public String endContract(@RequestParam String userNum,@RequestParam String houseContractNum,@RequestParam String requestType,
+                              @RequestParam Integer xuyueTime) {
+        return contractRequestService.sendContractRequest(userNum,houseContractNum,requestType,xuyueTime);
     }
 
 }
