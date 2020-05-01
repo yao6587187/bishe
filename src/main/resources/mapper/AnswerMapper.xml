@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.house.jikezu.dao.AnswerMapper" >
+
+    <resultMap id="BaseResultMap" type="com.house.jikezu.model.Answer" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="answer_num" property="answerNum" jdbcType="VARCHAR" />
+        <result column="answer_content" property="answerContent" jdbcType="VARCHAR" />
+        <result column="question_num" property="questionNum" jdbcType="VARCHAR" />
+        <result column="user_num" property="userNum" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, answer_num, answer_content, question_num, user_num
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from answer
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from answer
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.house.jikezu.model.Answer" >
+        insert into answer (id, answer_num, answer_content, 
+            question_num, user_num)
+        values (#{id,jdbcType=INTEGER}, #{answerNum,jdbcType=VARCHAR}, #{answerContent,jdbcType=VARCHAR}, 
+            #{questionNum,jdbcType=VARCHAR}, #{userNum,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.house.jikezu.model.Answer" >
+        insert into answer
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="answerNum != null" >
+                answer_num,
+            </if>
+            <if test="answerContent != null" >
+                answer_content,
+            </if>
+            <if test="questionNum != null" >
+                question_num,
+            </if>
+            <if test="userNum != null" >
+                user_num,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="answerNum != null" >
+                #{answerNum,jdbcType=VARCHAR},
+            </if>
+            <if test="answerContent != null" >
+                #{answerContent,jdbcType=VARCHAR},
+            </if>
+            <if test="questionNum != null" >
+                #{questionNum,jdbcType=VARCHAR},
+            </if>
+            <if test="userNum != null" >
+                #{userNum,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.house.jikezu.model.Answer" >
+        update answer
+        <set >
+            <if test="answerNum != null" >
+                answer_num = #{answerNum,jdbcType=VARCHAR},
+            </if>
+            <if test="answerContent != null" >
+                answer_content = #{answerContent,jdbcType=VARCHAR},
+            </if>
+            <if test="questionNum != null" >
+                question_num = #{questionNum,jdbcType=VARCHAR},
+            </if>
+            <if test="userNum != null" >
+                user_num = #{userNum,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.house.jikezu.model.Answer" >
+        update answer
+        set answer_num = #{answerNum,jdbcType=VARCHAR},
+            answer_content = #{answerContent,jdbcType=VARCHAR},
+            question_num = #{questionNum,jdbcType=VARCHAR},
+            user_num = #{userNum,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

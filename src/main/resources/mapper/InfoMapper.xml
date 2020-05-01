@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.house.jikezu.dao.InfoMapper" >
+
+    <resultMap id="BaseResultMap" type="com.house.jikezu.model.Info" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="info_num" property="infoNum" jdbcType="VARCHAR" />
+        <result column="info_title" property="infoTitle" jdbcType="VARCHAR" />
+        <result column="info_content" property="infoContent" jdbcType="LONGVARCHAR" />
+        <result column="user_num" property="userNum" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, info_num, info_title, info_content, user_num
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from info
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.house.jikezu.model.Info" >
+        insert into info (id, info_num, info_title, 
+            info_content, user_num)
+        values (#{id,jdbcType=INTEGER}, #{infoNum,jdbcType=VARCHAR}, #{infoTitle,jdbcType=VARCHAR}, 
+            #{infoContent,jdbcType=LONGVARCHAR}, #{userNum,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.house.jikezu.model.Info" >
+        insert into info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="infoNum != null" >
+                info_num,
+            </if>
+            <if test="infoTitle != null" >
+                info_title,
+            </if>
+            <if test="infoContent != null" >
+                info_content,
+            </if>
+            <if test="userNum != null" >
+                user_num,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="infoNum != null" >
+                #{infoNum,jdbcType=VARCHAR},
+            </if>
+            <if test="infoTitle != null" >
+                #{infoTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="infoContent != null" >
+                #{infoContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="userNum != null" >
+                #{userNum,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.house.jikezu.model.Info" >
+        update info
+        <set >
+            <if test="infoNum != null" >
+                info_num = #{infoNum,jdbcType=VARCHAR},
+            </if>
+            <if test="infoTitle != null" >
+                info_title = #{infoTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="infoContent != null" >
+                info_content = #{infoContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="userNum != null" >
+                user_num = #{userNum,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.house.jikezu.model.Info" >
+        update info
+        set info_num = #{infoNum,jdbcType=VARCHAR},
+            info_title = #{infoTitle,jdbcType=VARCHAR},
+            info_content = #{infoContent,jdbcType=LONGVARCHAR},
+            user_num = #{userNum,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
