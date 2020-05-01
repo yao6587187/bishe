@@ -6,6 +6,7 @@ import com.house.jikezu.service.ContractHouseService;
 import com.house.jikezu.vo.ContractInfoVO;
 import com.house.jikezu.vo.ContractSingleVO;
 import com.house.jikezu.vo.ContractVO;
+import com.house.jikezu.vo.PageData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -31,8 +32,8 @@ public class HouseContractController {
 
     @ApiOperation("我的合同")
     @GetMapping("/listHouseContract")
-    public List<ContractVO> listContract(@RequestParam String userNum) {
-        return contractHouseService.getContractHouse(userNum);
+    public PageData<List<ContractVO>> listContract(@RequestParam String userNum, @RequestParam Integer currentPage, @RequestParam Integer pageSize) {
+        return contractHouseService.getContractHouse(userNum,currentPage,pageSize);
     }
 
     @ApiOperation("查看合同")

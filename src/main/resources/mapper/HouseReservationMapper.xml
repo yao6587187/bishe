@@ -118,11 +118,12 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <select id="listReservations" resultMap="BaseResultMap" parameterType="string">
+    <select id="listReservations" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from house_reservation
-        where reservation_landlord_num = #{id,jdbcType=VARCHAR}
+        where reservation_landlord_num = #{tenant,jdbcType=VARCHAR}
+        limit #{pageIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
     </select>
 
     <delete id="deleteByReservationHouseNum" parameterType="string">

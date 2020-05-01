@@ -1,25 +1,21 @@
 package com.house.jikezu.service.serviceImpl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.house.jikezu.dao.HouseMapper;
 import com.house.jikezu.dao.HouseReleaseMapper;
 import com.house.jikezu.enums.HouseStatusEnum;
 import com.house.jikezu.model.House;
-import com.house.jikezu.model.HouseRelease;
 import com.house.jikezu.service.HouseService;
 import com.house.jikezu.util.MapUtils;
 import com.house.jikezu.util.OrderUtil;
 import com.house.jikezu.vo.HouseListReturnVO;
 import com.house.jikezu.vo.HouseListVo;
+import com.house.jikezu.vo.PageData;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,8 +35,15 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public List<House> listHouses(String userNum) {
-        return houseMapper.listHouses(userNum);
+    public PageData<List<House>> listHouses(String userNum,Integer currentPage,Integer pageSize) {
+        PageData<List<House>> pageData = new PageData<>();
+        pageData.setDatas(houseMapper.listHouses(userNum,(currentPage-1)*pageSize,pageSize));
+        pageData.setCurrentPage(currentPage);
+        pageData.setPageSize(pageSize);
+        if (pageData.getDatas() == null || pageData.getDatas().size() == 0){
+            pageData.setFinished(false);
+        }
+        return pageData;
     }
 
     @Override

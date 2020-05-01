@@ -6,6 +6,7 @@ import com.house.jikezu.model.House;
 import com.house.jikezu.model.HouseRelease;
 import com.house.jikezu.service.ReleaseHouseService;
 import com.house.jikezu.util.OrderUtil;
+import com.house.jikezu.vo.PageData;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -36,13 +37,16 @@ public class ReleaseHouseServiceImpl implements ReleaseHouseService {
     }
 
     @Override
-    public List<House> listReleaseHouses(String landlordNum) {
-        List<HouseRelease> houseReleases = houseReleaseMapper.listReleaseHouses(landlordNum);
-        List<House> houses = new ArrayList<>();
-        for (HouseRelease houseRelease : houseReleases
-        ) {
-            houses.add(houseMapper.selectByPrimaryKey(houseRelease.getReleaseHouseNum()));
+    public PageData<List<House>> listReleaseHouses(String landlordNum, Integer currentPage, Integer pageSize) {
+        PageData<List<House>> pageData = new PageData<>();
+        List<House> houses = houseReleaseMapper.listReleaseHouseByLandlordNumPage(landlordNum,
+                (currentPage-1)*pageSize,pageSize);
+        pageData.setCurrentPage(currentPage);
+        pageData.setPageSize(pageSize);
+        pageData.setDatas(houses);
+        if (pageData.getDatas() == null || pageData.getDatas().size() == 0){
+            pageData.setFinished(false);
         }
-        return houses;
+        return pageData;
     }
 }

@@ -124,4 +124,13 @@
         delete from house_release
         where release_house_num = #{id,jdbcType=VARCHAR}
     </delete>
+
+    <select id="listReleaseHouseByLandlordNumPage" resultType="com.house.jikezu.model.House">
+        select
+        house.*
+        from house,house_release
+        where house_release.release_user_num = #{landlordNum,jdbcType=VARCHAR} and
+        house.house_num = house_release.release_house_num
+        limit #{pageIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+    </select>
 </mapper>

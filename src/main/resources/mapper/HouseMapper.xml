@@ -324,11 +324,12 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <select id="listHouses" resultMap="BaseResultMap" parameterType="string">
+    <select id="listHouses" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from house
-        where own_user_num = #{id,jdbcType=VARCHAR}
+        where own_user_num = #{ownUserNum,jdbcType=VARCHAR}
+        limit #{pageIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
     </select>
 
     <select id="selectHousesByPage" resultMap="BaseResultMap" parameterType="com.house.jikezu.vo.HouseListVo">

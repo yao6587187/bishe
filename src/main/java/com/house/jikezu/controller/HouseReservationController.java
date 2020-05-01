@@ -1,6 +1,7 @@
 package com.house.jikezu.controller;
 
 import com.house.jikezu.service.ReservationHouseService;
+import com.house.jikezu.vo.PageData;
 import com.house.jikezu.vo.ReservationListReturnVO;
 import com.house.jikezu.vo.ReservationVO;
 import io.swagger.annotations.Api;
@@ -27,8 +28,8 @@ public class HouseReservationController {
 
     @GetMapping("/listReservationHouse")
     @ApiOperation("我的预约")
-    public List<ReservationListReturnVO> list(@RequestParam String landlordNum) {
-        return reservationHouseService.listReservationHouses(landlordNum);
+    public PageData<List<ReservationListReturnVO>> list(@RequestParam String landlordNum, @RequestParam Integer currentPage, @RequestParam Integer pageSize) {
+        return reservationHouseService.listReservationHouses(landlordNum,currentPage,pageSize);
     }
 
     @GetMapping("/deleteReservationHouse")

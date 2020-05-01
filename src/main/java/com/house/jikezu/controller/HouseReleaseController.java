@@ -2,6 +2,7 @@ package com.house.jikezu.controller;
 
 import com.house.jikezu.model.House;
 import com.house.jikezu.service.ReleaseHouseService;
+import com.house.jikezu.vo.PageData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class HouseReleaseController {
 
     @GetMapping("/listReleaseHouses")
     @ApiOperation("我的发布")
-    public List<House> list(@RequestParam String landlordNum) {
-        return releaseHouseService.listReleaseHouses(landlordNum);
+    public PageData<List<House>> list(@RequestParam String landlordNum, @RequestParam Integer currentPage, @RequestParam Integer pageSize) {
+        return releaseHouseService.listReleaseHouses(landlordNum,currentPage,pageSize);
     }
 }

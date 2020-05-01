@@ -5,6 +5,7 @@ import com.house.jikezu.service.HouseService;
 import com.house.jikezu.vo.ConditionHouseReturnVO;
 import com.house.jikezu.vo.HouseListReturnVO;
 import com.house.jikezu.vo.HouseListVo;
+import com.house.jikezu.vo.PageData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +36,8 @@ public class HouseController {
 
     @GetMapping("/listHouses")
     @ApiOperation("获取我的房源")
-    public List<House> list(@RequestParam String userNum){
-        return houseService.listHouses(userNum);
+    public PageData<List<House>> list(@RequestParam String userNum, @RequestParam Integer currentPage, @RequestParam Integer pageSize){
+        return houseService.listHouses(userNum,currentPage,pageSize);
     }
 
     @PostMapping("/getConditionHouse")
@@ -45,7 +46,7 @@ public class HouseController {
         ConditionHouseReturnVO conditionHouseReturnVO = new ConditionHouseReturnVO();
         List<HouseListReturnVO> vos = houseService.selectHousesByPage(houseListVo,houseListVo.getCurrentPage(),houseListVo.getPageSize());
         if (vos==null){
-            conditionHouseReturnVO.setFinished(true);
+            conditionHouseReturnVO.setFinished(false);
             return conditionHouseReturnVO;
         }
         conditionHouseReturnVO.setResultHouses(vos);

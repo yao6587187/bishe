@@ -10,5 +10,5 @@ public class ConditionHouseReturnVO {
     List<HouseListReturnVO> resultHouses;
 
     //是否已加载全部
-    Boolean finished = false;
+    Boolean finished = true;
 }

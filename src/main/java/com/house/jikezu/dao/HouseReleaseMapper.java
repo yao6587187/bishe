@@ -1,8 +1,10 @@
 package com.house.jikezu.dao;
 
 
+import com.house.jikezu.model.House;
 import com.house.jikezu.model.HouseRelease;
 import com.house.jikezu.model.HouseReservation;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -26,4 +28,6 @@ public interface HouseReleaseMapper {
     List<HouseRelease> listAllReleaseHousesExcMe(String landlordNum);
 
     void deleteByReleaseHouseNum(String houseNum);
+
+    List<House> listReleaseHouseByLandlordNumPage(@Param("landlordNum") String landlordNum, @Param("pageIndex") Integer pageIndex, @Param("pageSize") Integer pageSize);
 }

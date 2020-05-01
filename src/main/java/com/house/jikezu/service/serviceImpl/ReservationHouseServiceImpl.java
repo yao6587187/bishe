@@ -8,6 +8,7 @@ import com.house.jikezu.model.HouseReservation;
 import com.house.jikezu.model.HouseUser;
 import com.house.jikezu.service.ReservationHouseService;
 import com.house.jikezu.util.OrderUtil;
+import com.house.jikezu.vo.PageData;
 import com.house.jikezu.vo.ReservationListReturnVO;
 import com.house.jikezu.vo.ReservationVO;
 import org.springframework.stereotype.Service;
@@ -43,8 +44,9 @@ public class ReservationHouseServiceImpl implements ReservationHouseService {
     }
 
     @Override
-    public List<ReservationListReturnVO> listReservationHouses(String landlordNum) {
-        List<HouseReservation> houseReservations = houseReservationMapper.listReservations(landlordNum);
+    public PageData<List<ReservationListReturnVO>> listReservationHouses(String landlordNum, Integer currentPage, Integer pageSize) {
+        PageData<List<ReservationListReturnVO>> pageData = new PageData<>();
+        List<HouseReservation> houseReservations = houseReservationMapper.listReservations(landlordNum,(currentPage-1)*pageSize,pageSize);
         List<ReservationListReturnVO> reservationListReturnVOs = new ArrayList<>();
         ReservationListReturnVO reservationListReturnVO;
         for (HouseReservation houseReservation : houseReservations) {
@@ -61,7 +63,13 @@ public class ReservationHouseServiceImpl implements ReservationHouseService {
             reservationListReturnVO.setReservationUserNum(tenant.getUserNum());
             reservationListReturnVOs.add(reservationListReturnVO);
         }
-        return reservationListReturnVOs;
+        pageData.setDatas(reservationListReturnVOs);
+        pageData.setPageSize(pageSize);
+        if (pageData.getDatas() == null || pageData.getDatas().size() == 0){
+            pageData.setFinished(false);
+        }
+        pageData.setCurrentPage(currentPage);
+        return pageData;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.house.jikezu.service;
 
+import com.house.jikezu.vo.PageData;
 import com.house.jikezu.vo.ReservationListReturnVO;
 import com.house.jikezu.vo.ReservationVO;
 
@@ -22,7 +23,7 @@ public interface ReservationHouseService {
      * @param tenantNum
      * @return
      */
-    List<ReservationListReturnVO> listReservationHouses(String landlordNum);
+    PageData<List<ReservationListReturnVO>> listReservationHouses(String landlordNum, Integer currentPage, Integer pageSize);
 
     /**
      * 删除预约

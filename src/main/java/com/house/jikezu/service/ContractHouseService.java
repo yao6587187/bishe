@@ -4,6 +4,7 @@ import com.house.jikezu.model.HouseContract;
 import com.house.jikezu.vo.ContractInfoVO;
 import com.house.jikezu.vo.ContractSingleVO;
 import com.house.jikezu.vo.ContractVO;
+import com.house.jikezu.vo.PageData;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface ContractHouseService {
     /**
      * 我的合同
      */
-    List<ContractVO> getContractHouse(String userNum);
+    PageData<List<ContractVO>> getContractHouse(String userNum, Integer currentPage, Integer pageSize);
 
     /**
      * 查看合同

@@ -124,10 +124,11 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <select id="listHouseContract" parameterType="string" resultMap="BaseResultMap">
+    <select id="listHouseContract" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from house_contract
-        where house_landlord_num = #{id,jdbcType=VARCHAR} or house_tenant_num = #{id,jdbcType=VARCHAR}
+        where house_landlord_num = #{userNum,jdbcType=VARCHAR} or house_tenant_num = #{userNum,jdbcType=VARCHAR}
+        limit #{pageIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
     </select>
 </mapper>

@@ -3,6 +3,7 @@ package com.house.jikezu.service;
 import com.house.jikezu.model.House;
 import com.house.jikezu.vo.HouseListReturnVO;
 import com.house.jikezu.vo.HouseListVo;
+import com.house.jikezu.vo.PageData;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface HouseService {
     /**
      * 我的房源
      */
-    List<House> listHouses(String userNum);
+    PageData<List<House>> listHouses(String userNum,Integer currentPage,Integer pageSize);
 
     /**
      * 查询房源详情

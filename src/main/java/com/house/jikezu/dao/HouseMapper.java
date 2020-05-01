@@ -3,6 +3,7 @@ package com.house.jikezu.dao;
 
 import com.house.jikezu.model.House;
 import com.house.jikezu.vo.HouseListVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface HouseMapper {
 
     int updateByPrimaryKey(House record);
 
-    List<House> listHouses(String ownUserNum);
+    List<House> listHouses(@Param("ownUserNum") String ownUserNum,@Param("pageIndex") Integer pageIndex,@Param("pageSize") Integer pageSize);
 
     List<House> selectHousesByPage(HouseListVo houseListVo);
 }

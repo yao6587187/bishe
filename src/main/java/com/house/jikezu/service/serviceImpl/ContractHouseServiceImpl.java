@@ -11,9 +11,7 @@ import com.house.jikezu.model.HouseReservation;
 import com.house.jikezu.model.HouseUser;
 import com.house.jikezu.service.ContractHouseService;
 import com.house.jikezu.util.OrderUtil;
-import com.house.jikezu.vo.ContractInfoVO;
-import com.house.jikezu.vo.ContractSingleVO;
-import com.house.jikezu.vo.ContractVO;
+import com.house.jikezu.vo.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -62,8 +60,9 @@ public class ContractHouseServiceImpl implements ContractHouseService {
     }
 
     @Override
-    public List<ContractVO> getContractHouse(String userNum) {
-        List<HouseContract> houseContracts = houseContractMapper.listHouseContract(userNum);
+    public PageData<List<ContractVO>> getContractHouse(String userNum,Integer currentPage,Integer pageSize) {
+        PageData<List<ContractVO>> pageData = new PageData<>();
+        List<HouseContract> houseContracts = houseContractMapper.listHouseContract(userNum,(currentPage-1)*pageSize,pageSize);
         List<ContractVO> contractVOS = new ArrayList<>();
         for (HouseContract houseContract : houseContracts
         ) {
@@ -84,7 +83,13 @@ public class ContractHouseServiceImpl implements ContractHouseService {
             contractVO.setHouseAddress(descAddress);
             contractVOS.add(contractVO);
         }
-        return contractVOS;
+        pageData.setDatas(contractVOS);
+        pageData.setPageSize(pageSize);
+        pageData.setCurrentPage(currentPage);
+        if (pageData.getDatas() == null || pageData.getDatas().size() == 0){
+            pageData.setFinished(false);
+        }
+        return pageData;
     }
 
     @Override
