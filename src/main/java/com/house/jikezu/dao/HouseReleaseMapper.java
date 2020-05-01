@@ -19,4 +19,6 @@ public interface HouseReleaseMapper {
     int updateByPrimaryKey(HouseRelease record);
 
     List<HouseRelease> listReleaseHouses(String landlordNum);
+
+    List<HouseRelease> listAllReleaseHousesExcMe(String landlordNum);
 }
